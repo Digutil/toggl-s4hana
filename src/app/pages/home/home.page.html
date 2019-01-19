@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid>
+    <ng-container *ngFor="let timeKey of objectKeys(entries)">
+      <ion-row class="day">
+        <ion-col>{{timeKey}}</ion-col>
+      </ion-row>
+
+      <ng-container *ngFor="let projectKey of objectKeys(entries[timeKey])">
+
+        <ion-row>
+          <ion-col>
+            {{ mapProject(projectKey) }}
+          </ion-col>
+          <ion-col>
+            <input type="text" id="{{timeKey + '|' + projectKey}}" value="{{entries[timeKey][projectKey]['descriptions'].join(', ')}}" />
+          </ion-col>
+          <ion-col size="2">
+            {{timeConversion(entries[timeKey][projectKey]['duration'])}}
+          </ion-col>
+          <ion-col size="1">
+            <span class="copy" (click)="copyDescription(timeKey + '|' + projectKey)">Copy</span>
+          </ion-col>
+        </ion-row>
+
+      </ng-container>
+    </ng-container>
+
+  </ion-grid>
+
+</ion-content>

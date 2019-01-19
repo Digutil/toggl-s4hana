@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>auth</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Toggl API Token</ion-label>
+      <ion-input [(ngModel)]="apiToken"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="fetchWorkspaces()">Fetch workspaces</ion-button>
+
+  <ng-container *ngIf="workspaces">
+    <ion-item>
+      <ion-label>Workspace</ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="selectedWorkspace">
+        <ng-container *ngFor="let workspace of workspaces">
+          <ion-select-option value="{{workspace.id}}">{{workspace.name}}</ion-select-option>
+        </ng-container>
+      </ion-select>
+    </ion-item>
+    <ion-button (click)="continue()">Continue</ion-button>
+  </ng-container>
+
+</ion-content>
